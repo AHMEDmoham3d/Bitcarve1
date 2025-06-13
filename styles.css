@@ -1,0 +1,592 @@
+/* Enhanced CSS with 3D Elements and Advanced Animations */
+:root {
+    --primary-color: #3b82f6;
+    --primary-dark: #2563eb;
+    --secondary-color: #f59e0b;
+    --accent-color: #8b5cf6;
+    --dark-color: #1e293b;
+    --light-color: #f8fafc;
+    --gray-color: #64748b;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --border-radius: 12px;
+    --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --section-spacing: 3rem;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', 'Poppins', sans-serif;
+    line-height: 1.7;
+    color: var(--dark-color);
+    background-color: #f1f5f9;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 3D Floating Elements */
+.floating-3d {
+    position: fixed;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.15;
+    filter: blur(1px);
+}
+
+#floating-cube {
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 20px;
+    transform: rotate(15deg);
+    top: 20%;
+    left: 5%;
+    animation: floatCube 25s infinite ease-in-out;
+}
+
+#floating-coder {
+    width: 200px;
+    height: 200px;
+    background: url('https://assets.codepen.io/210284/coder.svg') no-repeat center center;
+    background-size: contain;
+    top: 60%;
+    right: 5%;
+    animation: floatCoder 30s infinite ease-in-out;
+}
+
+@keyframes floatCube {
+    0%, 100% {
+        transform: translateY(0) rotate(15deg) translateX(0);
+    }
+    50% {
+        transform: translateY(-50px) rotate(25deg) translateX(20px);
+    }
+}
+
+@keyframes floatCoder {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-40px) rotate(5deg);
+    }
+    50% {
+        transform: translateY(0) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-30px) rotate(-5deg);
+    }
+}
+
+/* Header Styles */
+/* Header Styles */
+header {
+    background: rgba(30, 58, 138, 0.9); /* Glass-like effect */
+    backdrop-filter: blur(8px);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 2rem 0;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
+}
+
+/* المحتوى الداخلي للهيدر */
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem; /* padding أكبر يمنع الالتصاق */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2.5rem; /* مسافة بين اللوجو والنص */
+}
+
+/* الحاوية الخاصة باللوجو */
+.logo-container {
+    flex-shrink: 0;
+}
+
+.logo-container img {
+    max-height: 70px;
+    width: auto;
+}
+
+/* النص بجانب اللوجو */
+.header-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* العنوان الرئيسي */
+header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    margin: 0;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+/* العنوان الفرعي */
+header h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    -top: 0.5rem;
+    color: #dbeafe;
+    opacity: 0.95;
+    max-width: 600px;
+}
+
+
+/* Main Content Styles */
+main {
+    padding: 2rem 0;
+    position: relative;
+    margin:40px;
+}
+
+section {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    margin-bottom: var(--section-spacing);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(139, 92, 246, 0.03) 100%);
+    z-index: -1;
+}
+
+section:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+section h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--primary-color);
+    margin-bottom: 2rem;
+    display: inline-block;
+    position: relative;
+}
+
+section h2::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 50%;
+    height: 3px;
+    background-color: var(--secondary-color);
+    transition: var(--transition);
+}
+
+section:hover h2::after {
+    width: 100%;
+}
+
+section h3 {
+    font-size: 1.4rem;
+    color: var(--dark-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 2.5rem;
+}
+
+section h3::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.75rem;
+    height: 1.75rem;
+    background-color: var(--secondary-color);
+    border-radius: 6px;
+    box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.3);
+}
+
+/* Enhanced Table Styles */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2rem 0;
+    font-size: 0.95rem;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transform: translateZ(20px);
+    background: white;
+}
+
+table th {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    font-weight: 600;
+    padding: 1rem;
+    text-align: left;
+    position: sticky;
+    top: 0;
+}
+
+table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    transition: var(--transition);
+}
+
+table tr:not(:first-child) {
+    transition: var(--transition);
+}
+
+table tr:not(:first-child):hover {
+    transform: translateX(10px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+table tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+/* Enhanced Icon Styles */
+.icon-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.icon-box.cross {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+}
+
+/* Animated List Items */
+ul.animated-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    opacity: 0;
+    animation: fadeInRight 0.5s ease-out forwards;
+    animation-delay: calc(var(--i) * 0.1s);
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 3D Card Effect */
+.card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+}
+
+.card-3d:hover {
+    transform: rotateY(10deg) rotateX(5deg) translateZ(10px);
+}
+
+/* Floating Action Button */
+.fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+    transition: var(--transition);
+    animation: pulse 2s infinite;
+}
+
+.fab:hover {
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(59, 130, 246, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    }
+}
+
+/* Footer Styles */
+footer {
+    background: linear-gradient(135deg, var(--dark-color), #0f172a);
+    color: white;
+    text-align: center;
+    padding: 3rem 0;
+    margin-top: var(--section-spacing);
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.03)" d="M0,0 L100,0 L100,100 Q50,80 0,100 Z"></path></svg>');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    :root {
+        --section-spacing: 2.5rem;
+    }
+    
+    header h1 {
+        font-size: 2.5rem;
+    }
+    
+    header h2 {
+        font-size: 1.5rem;
+    }
+    
+    section {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-spacing: 2rem;
+    }
+    
+    header {
+        padding: 3rem 0;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    header h2 {
+        font-size: 1.25rem;
+    }
+    
+    section {
+        padding: 1.75rem;
+    }
+    
+    section h2 {
+        font-size: 1.6rem;
+    }
+    
+    section h3 {
+        font-size: 1.2rem;
+    }
+    
+    .floating-3d {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --section-spacing: 1.5rem;
+    }
+    
+    header {
+        padding: 2.5rem 0;
+    }
+    
+    section {
+        padding: 1.5rem;
+    }
+    
+    section h2 {
+        font-size: 1.4rem;
+    }
+    
+    section h3 {
+        font-size: 1.1rem;
+        padding-left: 2rem;
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+/* Additional Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Section Entrance Animations */
+section {
+    opacity: 0;
+    transform: translateY(30px) rotateX(10deg);
+    animation: sectionEntrance 0.8s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
+}
+
+@keyframes sectionEntrance {
+    to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+/* Delay animations for each section */
+section:nth-child(1) { animation-delay: 0.1s; }
+section:nth-child(2) { animation-delay: 0.2s; }
+section:nth-child(3) { animation-delay: 0.3s; }
+section:nth-child(4) { animation-delay: 0.4s; }
+section:nth-child(5) { animation-delay: 0.5s; }
+/* Continue for all sections as needed */
+
+/* 3D Typing Animation */
+.typing-container {
+    position: relative;
+    display: inline-block;
+}
+
+.typing-cursor {
+    position: absolute;
+    right: -10px;
+    bottom: 5px;
+    width: 8px;
+    height: 2rem;
+    background-color: var(--secondary-color);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+/* زر الترجمة */
+.translate-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.translate-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.translate-btn i {
+    font-size: 1.2rem;
+}
+
+/* عند الترجمة للعربية */
+body.arabic {
+    direction: rtl;
+    font-family: 'Tajawal', 'Arial', sans-serif;
+}
+
+body.arabic header h1,
+body.arabic header h2 {
+    font-family: 'Tajawal', 'Poppins', sans-serif;
+}
+/* Add this to your HTML for the 3D coder animation */
+/*
+<div class="floating-3d" id="floating-cube"></div>
+<div class="floating-3d" id="floating-coder"></div>
+<div class="fab">
+    <i class="fas fa-paper-plane"></i>
+</div>
+*/
