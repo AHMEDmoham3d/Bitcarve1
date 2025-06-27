@@ -1160,14 +1160,23 @@
           function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
-                includedLanguages: 'en,ar',
-                layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
+                includedLanguages: 'en,ar,fr,es',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
             }, 'google_translate_element');
             
-            // تغيير نص الزر بعد التحميل
+            // تغيير النص بعد التحميل
             setTimeout(function() {
-                var button = document.querySelector(".goog-te-menu-value span");
-                if(button) button.innerHTML = "اللغة";
+                const select = document.querySelector('.goog-te-combo');
+                if (select) {
+                    select.setAttribute('aria-label', 'Select Language');
+                }
+                
+                // إضافة أيقونة مخصصة
+                const wrapper = document.querySelector('#google_translate_element');
+                if (wrapper) {
+                    wrapper.style.display = 'inline-block';
+                }
             }, 1000);
         }
     // Animate list items
