@@ -1220,12 +1220,12 @@
             }
         });
     // Animate list items
-    document.querySelectorAll('ul:not(.animated-list)').forEach(ul => {
-        ul.classList.add('animated-list');
-        ul.querySelectorAll('li').forEach((li, i) => {
-            li.style.setProperty('--i', i);
-        });
-    });
+    // document.querySelectorAll('ul:not(.animated-list)').forEach(ul => {
+    //     ul.classList.add('animated-list');
+    //     ul.querySelectorAll('li').forEach((li, i) => {
+    //         li.style.setProperty('--i', i);
+    //     });
+    // });
 
     // Make FAB clickable (example: scroll to top)
     document.querySelector('.fab').addEventListener('click', () => {
