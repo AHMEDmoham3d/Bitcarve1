@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bitcarve Business Plan</title>
@@ -1153,9 +1154,22 @@
 <div class="fab">
     <i class="fas fa-paper-plane"></i>
 </div>
-
+    <div id="google_translate_element"></div>
 <!-- Add this script for section animations -->
 <script>
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,ar',
+                layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
+            }, 'google_translate_element');
+            
+            // تغيير نص الزر بعد التحميل
+            setTimeout(function() {
+                var button = document.querySelector(".goog-te-menu-value span");
+                if(button) button.innerHTML = "اللغة";
+            }, 1000);
+        }
     // Animate list items
     document.querySelectorAll('ul:not(.animated-list)').forEach(ul => {
         ul.classList.add('animated-list');

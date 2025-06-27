@@ -590,3 +590,23 @@ body.arabic header h2 {
     <i class="fas fa-paper-plane"></i>
 </div>
 */
+        #google_translate_element {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 9999;
+        }
+        
+        /* إخفاء شعار جوجل */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+        
+        /* تحسين مظهر القائمة */
+        .goog-te-menu-value span {
+            color: #fff !important;
+        }
+        .goog-te-menu-value {
+            color: transparent !important;
+        }
+        
