@@ -1199,41 +1199,58 @@
     document.querySelectorAll('section').forEach(section => {
         observer.observe(section);
     });
-     let googleTranslateInitialized = false;
+            // تحميل أداة الترجمة عند الحاجة
+        function loadGoogleTranslate() {
+            if (!window.google || !google.translate) {
+                const script = document.createElement('script');
+                script.src = 'https://translate.google.com/translate_a/element.js?cb=initGoogleTranslate';
+                document.body.appendChild(script);
+                return true;
+            }
+            return false;
+        }
         
-        function googleTranslateElementInit() {
-            googleTranslateInitialized = true;
+        // تهيئة أداة الترجمة
+        function initGoogleTranslate() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
                 includedLanguages: 'en,ar,de,fr',
                 layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
                 autoDisplay: false
-            }, 'google_translate_element');
+            }, 'hiddenTranslate');
             
-            // إخفاء العناصر غير المرغوب فيها بعد التحميل
+            // إخفاء العناصر غير المرغوب فيها
             setTimeout(() => {
-                const iframe = document.querySelector('.goog-te-banner-frame');
-                if (iframe) iframe.style.display = 'none';
-                
-                const combo = document.querySelector('.goog-te-combo');
-                if (combo) combo.style.display = 'none';
+                const frames = document.querySelectorAll('.goog-te-banner-frame, .goog-te-ftab-frame');
+                frames.forEach(frame => frame.style.display = 'none');
             }, 1000);
         }
         
-        // تحميل أداة الترجمة إذا لم تكن محملة
-        function loadGoogleTranslate() {
-            if (!googleTranslateInitialized) {
-                const script = document.createElement('script');
-                script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-                document.body.appendChild(script);
+        // تغيير اللغة
+        function changeLanguage(lang) {
+            const select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = lang;
+                const event = new Event('change', {
+                    bubbles: true,
+                    cancelable: true
+                });
+                select.dispatchEvent(event);
             }
         }
         
         // التحكم في الواجهة المخصصة
         document.getElementById('translateBtn').addEventListener('click', function(e) {
             e.stopPropagation();
-            loadGoogleTranslate();
-            document.getElementById('translateDropdown').classList.toggle('show');
+            const wasLoaded = loadGoogleTranslate();
+            if (wasLoaded) {
+                // إذا تم تحميل الأداة للتو، انتظر قليلاً قبل عرض القائمة
+                setTimeout(() => {
+                    document.getElementById('translateDropdown').classList.toggle('show');
+                }, 300);
+            } else {
+                document.getElementById('translateDropdown').classList.toggle('show');
+            }
         });
         
         // عند اختيار لغة
@@ -1242,43 +1259,30 @@
                 e.stopPropagation();
                 const lang = this.getAttribute('data-lang');
                 
-                if (!googleTranslateInitialized) {
+                if (!window.google || !google.translate) {
                     loadGoogleTranslate();
                     setTimeout(() => changeLanguage(lang), 500);
                 } else {
                     changeLanguage(lang);
                 }
                 
-                // إضافة تأثير التحديد
+                // تحديث الواجهة
                 document.querySelectorAll('.translate-option').forEach(opt => {
                     opt.classList.remove('active');
                 });
                 this.classList.add('active');
-                
-                // إغلاق القائمة
                 document.getElementById('translateDropdown').classList.remove('show');
-                
-                // تغيير أيقونة الزر
                 document.getElementById('translateBtn').textContent = this.querySelector('.flag').textContent;
             });
         });
-        
-        // تغيير اللغة
-        function changeLanguage(lang) {
-            const select = document.querySelector('.goog-te-combo');
-            if (select) {
-                select.value = lang;
-                const event = new Event('change');
-                select.dispatchEvent(event);
-            } else {
-                console.error('عنصر الترجمة غير موجود');
-            }
-        }
         
         // إغلاق القائمة عند النقر خارجها
         document.addEventListener('click', function() {
             document.getElementById('translateDropdown').classList.remove('show');
         });
+        
+        // تهيئة أولية
+        loadGoogleTranslate();
 </script>
 </body>
 </html>
