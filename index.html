@@ -29,8 +29,24 @@
     <main>
         <!-- Section 1 -->
         <section>
-              <div id="google_translate_element"></div>
-
+    <div id="google_translate_element" style="display:none"></div>
+    
+    <!-- واجهة الترجمة المخصصة -->
+    <button class="custom-translate-btn" id="translateBtn">🌐</button>
+    <div class="custom-translate-dropdown" id="translateDropdown">
+        <div class="translate-option active" data-lang="en">
+            <span class="flag">🇬🇧</span> English
+        </div>
+        <div class="translate-option" data-lang="ar">
+            <span class="flag">🇸🇦</span> العربية
+        </div>
+        <div class="translate-option" data-lang="de">
+            <span class="flag">🇩🇪</span> Deutsch
+        </div>
+        <div class="translate-option" data-lang="fr">
+            <span class="flag">🇫🇷</span> Français
+        </div>
+    </div>
             <h2>1. Company Vision and Goals</h2>
             <h3>Our Goal:</h3>
             <p>To establish an international software company providing professional services in website development, applications, and SaaS solutions.</p>
@@ -1158,28 +1174,51 @@
 </div>
 <!-- Add this script for section animations -->
 <script>
-          function googleTranslateElementInit() {
+  function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
-                includedLanguages: 'en,ar,fr,es',
+                includedLanguages: 'en,ar,de,fr',
                 layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
                 autoDisplay: false
             }, 'google_translate_element');
-            
-            // تغيير النص بعد التحميل
-            setTimeout(function() {
+        }
+        
+        // التحكم في الواجهة المخصصة
+        document.getElementById('translateBtn').addEventListener('click', function() {
+            document.getElementById('translateDropdown').classList.toggle('show');
+        });
+        
+        // عند اختيار لغة
+        document.querySelectorAll('.translate-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
                 const select = document.querySelector('.goog-te-combo');
+                
                 if (select) {
-                    select.setAttribute('aria-label', 'Select Language');
+                    select.value = lang;
+                    select.dispatchEvent(new Event('change'));
                 }
                 
-                // إضافة أيقونة مخصصة
-                const wrapper = document.querySelector('#google_translate_element');
-                if (wrapper) {
-                    wrapper.style.display = 'inline-block';
-                }
-            }, 1000);
-        }
+                // إضافة تأثير التحديد
+                document.querySelectorAll('.translate-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // إغلاق القائمة
+                document.getElementById('translateDropdown').classList.remove('show');
+                
+                // تغيير أيقونة الزر
+                document.getElementById('translateBtn').textContent = this.querySelector('.flag').textContent;
+            });
+        });
+        
+        // إغلاق القائمة عند النقر خارجها
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('#translateBtn') && !e.target.closest('#translateDropdown')) {
+                document.getElementById('translateDropdown').classList.remove('show');
+            }
+        });
     // Animate list items
     document.querySelectorAll('ul:not(.animated-list)').forEach(ul => {
         ul.classList.add('animated-list');
