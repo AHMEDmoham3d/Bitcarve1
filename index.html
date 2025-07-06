@@ -1304,19 +1304,20 @@
     <!-- 3D Floating Elements -->
 <div class="floating-3d" id="floating-cube"></div>
 <div class="floating-3d" id="floating-coder"></div>
+
+
+<!-- Floating Action Button -->
+<div class="fab">
+    <i class="fas fa-paper-plane"></i>
+</div>
 <div id="toolbar">
   <button onclick="selectTool('pen')">✏️</button>
   <button onclick="selectTool('eraser')">🧽</button>
   <button onclick="clearCanvas()">🗑️</button>
 </div>
-
-<!-- Canvas Layer -->
 <canvas id="draw-canvas"></canvas>
-<!-- Floating Action Button -->
-<div class="fab">
-    <i class="fas fa-paper-plane"></i>
-</div>
 <!-- Add this script for section animations -->
+
 <script>
     // Animate list items
     document.querySelectorAll('ul:not(.animated-list)').forEach(ul => {
