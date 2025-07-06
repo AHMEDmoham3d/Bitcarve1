@@ -1333,23 +1333,19 @@
     document.querySelectorAll('section').forEach(section => {
         observer.observe(section);
     });
-     document.addEventListener("DOMContentLoaded", () => {
-    const tables = document.querySelectorAll("table");
-
-    tables.forEach((table, index) => {
-      // لف الجدول في div
+      document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("table").forEach((table) => {
       const wrapper = document.createElement("div");
-      wrapper.classList.add("table-wrapper");
+      wrapper.className = "table-wrapper";
 
-      // زر التحكم
       const controls = document.createElement("div");
-      controls.classList.add("table-controls");
+      controls.className = "table-controls";
 
       const fullBtn = document.createElement("button");
-      fullBtn.textContent = "🔍 Full View";
+      fullBtn.innerText = " Open ";
 
       const closeBtn = document.createElement("button");
-      closeBtn.textContent = "❌ Close";
+      closeBtn.innerText = "❌ Close";
       closeBtn.style.display = "none";
 
       controls.appendChild(fullBtn);
@@ -1360,13 +1356,13 @@
       wrapper.appendChild(table);
 
       fullBtn.addEventListener("click", () => {
-        wrapper.classList.add("full-screen-table");
+        wrapper.classList.add("fullscreen-mode");
         fullBtn.style.display = "none";
         closeBtn.style.display = "inline-block";
       });
 
       closeBtn.addEventListener("click", () => {
-        wrapper.classList.remove("full-screen-table");
+        wrapper.classList.remove("fullscreen-mode");
         fullBtn.style.display = "inline-block";
         closeBtn.style.display = "none";
       });
