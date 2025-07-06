@@ -28,15 +28,7 @@
 
     <main>
       <!-- Toolbar -->
-<div id="toolbar">
-  <button onclick="selectTool('pen')">✏️</button>
-  <button onclick="selectTool('eraser')">🧽</button>
-  <button onclick="clearCanvas()">🗑️</button>
-  <button onclick="selectTool('laser')">🎯</button>
-</div>
 
-<!-- Canvas Layer -->
-<canvas id="draw-canvas"></canvas>
 
         <!-- Section 1 -->
         <section>
@@ -1312,7 +1304,15 @@
     <!-- 3D Floating Elements -->
 <div class="floating-3d" id="floating-cube"></div>
 <div class="floating-3d" id="floating-coder"></div>
+<div id="toolbar">
+  <button onclick="selectTool('pen')">✏️</button>
+  <button onclick="selectTool('eraser')">🧽</button>
+  <button onclick="clearCanvas()">🗑️</button>
+  <button onclick="selectTool('laser')">🎯</button>
+</div>
 
+<!-- Canvas Layer -->
+<canvas id="draw-canvas"></canvas>
 <!-- Floating Action Button -->
 <div class="fab">
     <i class="fas fa-paper-plane"></i>
