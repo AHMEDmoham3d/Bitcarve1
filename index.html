@@ -1333,41 +1333,7 @@
     document.querySelectorAll('section').forEach(section => {
         observer.observe(section);
     });
-      document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll("table").forEach((table) => {
-      const wrapper = document.createElement("div");
-      wrapper.className = "table-wrapper";
-
-      const controls = document.createElement("div");
-      controls.className = "table-controls";
-
-      const fullBtn = document.createElement("button");
-      fullBtn.innerText = " Open ";
-
-      const closeBtn = document.createElement("button");
-      closeBtn.innerText = "❌ Close";
-      closeBtn.style.display = "none";
-
-      controls.appendChild(fullBtn);
-      controls.appendChild(closeBtn);
-
-      table.parentNode.insertBefore(wrapper, table);
-      wrapper.appendChild(controls);
-      wrapper.appendChild(table);
-
-      fullBtn.addEventListener("click", () => {
-        wrapper.classList.add("fullscreen-mode");
-        fullBtn.style.display = "none";
-        closeBtn.style.display = "inline-block";
-      });
-
-      closeBtn.addEventListener("click", () => {
-        wrapper.classList.remove("fullscreen-mode");
-        fullBtn.style.display = "inline-block";
-        closeBtn.style.display = "none";
-      });
-    });
-  });
+    
 </script>
 </body>
 </html>
