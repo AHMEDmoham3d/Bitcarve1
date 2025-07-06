@@ -1310,12 +1310,7 @@
 <div class="fab">
     <i class="fas fa-paper-plane"></i>
 </div>
-<div id="toolbar">
-  <button onclick="setTool('pen')" id="btn-pen" class="tool-btn">✏️</button>
-  <button onclick="setTool('eraser')" id="btn-eraser" class="tool-btn">🧽</button>
-  <button onclick="clearCanvas()" class="tool-btn">🗑️</button>
-</div>
-<canvas id="draw-canvas"></canvas>
+
 <!-- Add this script for section animations -->
 
 <script>
@@ -1344,58 +1339,6 @@
     document.querySelectorAll('section').forEach(section => {
         observer.observe(section);
     });
-
-   const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
-  let drawing = false;
-  let tool = 'pen';
-  let lastX = 0;
-  let lastY = 0;
-
-  function resizeCanvas() {
-    canvas.width = document.body.scrollWidth;
-    canvas.height = document.body.scrollHeight;
-  }
-
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-
-  function setTool(selected) {
-    tool = selected;
-
-    // Highlight active tool
-    document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
-    if (tool === 'pen') document.getElementById('btn-pen').classList.add('active');
-    if (tool === 'eraser') document.getElementById('btn-eraser').classList.add('active');
-  }
-
-  function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
-
-  canvas.addEventListener('mousedown', e => {
-    drawing = true;
-    [lastX, lastY] = [e.pageX, e.pageY];
-  });
-
-  canvas.addEventListener('mousemove', e => {
-    if (!drawing) return;
-    const [x, y] = [e.pageX, e.pageY];
-    if (tool === 'pen') {
-      ctx.strokeStyle = '#00f';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(lastX, lastY);
-      ctx.lineTo(x, y);
-      ctx.stroke();
-    } else if (tool === 'eraser') {
-      ctx.clearRect(x - 8, y - 8, 16, 16);
-    }
-    [lastX, lastY] = [x, y];
-  });
-
-  canvas.addEventListener('mouseup', () => drawing = false);
-  canvas.addEventListener('mouseleave', () => drawing = false);
 </script>
 </body>
 </html>
