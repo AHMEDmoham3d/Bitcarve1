@@ -683,3 +683,30 @@ body.arabic header h2 {
             display: none !important;
         }
         
+         #toolbar {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+
+  #toolbar button {
+    font-size: 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    background: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+  #draw-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+    pointer-events: none;
+  }

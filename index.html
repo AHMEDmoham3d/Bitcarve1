@@ -27,6 +27,17 @@
 
 
     <main>
+      <!-- Toolbar -->
+<div id="toolbar">
+  <button onclick="selectTool('pen')">✏️</button>
+  <button onclick="selectTool('eraser')">🧽</button>
+  <button onclick="clearCanvas()">🗑️</button>
+  <button onclick="selectTool('laser')">🎯</button>
+</div>
+
+<!-- Canvas Layer -->
+<canvas id="draw-canvas"></canvas>
+
         <!-- Section 1 -->
         <section>
               <div id="google_translate_element"></div>
@@ -1333,7 +1344,66 @@
     document.querySelectorAll('section').forEach(section => {
         observer.observe(section);
     });
-    
+
+  const canvas = document.getElementById('draw-canvas');
+  const ctx = canvas.getContext('2d');
+
+  let drawing = false;
+  let tool = 'pen';
+
+  // Resize canvas to fit screen
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  let lastX = 0, lastY = 0;
+
+  function selectTool(selected) {
+    tool = selected;
+    if (tool === 'laser') {
+      canvas.style.pointerEvents = 'none'; // مجرد مؤشر فقط
+    } else {
+      canvas.style.pointerEvents = 'auto';
+    }
+  }
+
+  function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  canvas.addEventListener('mousedown', (e) => {
+    drawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+  });
+
+  canvas.addEventListener('mousemove', (e) => {
+    if (!drawing) return;
+
+    const [x, y] = [e.offsetX, e.offsetY];
+
+    if (tool === 'pen') {
+      ctx.strokeStyle = '#ff1493';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    }
+
+    if (tool === 'eraser') {
+      ctx.clearRect(x - 8, y - 8, 16, 16);
+    }
+
+    [lastX, lastY] = [x, y];
+  });
+
+  canvas.addEventListener('mouseup', () => drawing = false);
+  canvas.addEventListener('mouseleave', () => drawing = false);
+
+
 </script>
 </body>
 </html>
