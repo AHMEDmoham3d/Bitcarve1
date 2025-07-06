@@ -683,30 +683,48 @@ body.arabic header h2 {
             display: none !important;
         }
         
-         #toolbar {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 9999;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 6px 10px;
-    border-radius: 8px;
-  }
+            #toolbar {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 8px;
+      border-radius: 10px;
+      display: flex;
+      gap: 10px;
+    }
 
-  #toolbar button {
-    font-size: 20px;
-    margin: 0 5px;
-    cursor: pointer;
-    background: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-  }
+    .tool-btn {
+      background: white;
+      border: none;
+      padding: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
 
-  #draw-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9998;
-    pointer-events: none;
-  }
+    .tool-btn svg {
+      width: 22px;
+      height: 22px;
+      stroke: #333;
+    }
+
+    .tool-btn.active {
+      background-color: #9333ea;
+    }
+
+    .tool-btn.active svg {
+      stroke: white;
+    }
+
+    #draw-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9998;
+      pointer-events: auto;
+    }

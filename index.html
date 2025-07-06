@@ -27,17 +27,21 @@
 
 
     <main>
-      <!-- Toolbar -->
+
 <div id="toolbar">
-  <button onclick="selectTool('pen')">✏️</button>
-  <button onclick="selectTool('eraser')">🧽</button>
-  <button onclick="clearCanvas()">🗑️</button>
-  <button onclick="selectTool('laser')">🎯</button>
+  <button class="tool-btn" onclick="selectTool('pen')" id="pen-btn" title="Pen">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4Z" /></svg>
+  </button>
+  <button class="tool-btn" onclick="selectTool('eraser')" id="eraser-btn" title="Eraser">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="m7 21 14-14a2.828 2.828 0 0 0-4-4L3 17v4h4Z" /><path d="M14 7 7 14" /></svg>
+  </button>
+  <button class="tool-btn" onclick="selectTool('laser')" id="laser-btn" title="Laser Pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><circle cx="12" cy="12" r="5" /></svg>
+  </button>
+  <button class="tool-btn" onclick="clearCanvas()" title="Clear All">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 6h18" /><path d="M8 6v14h8V6" /><path d="M10 10h4" /></svg>
+  </button>
 </div>
-
-<!-- Canvas Layer -->
-<canvas id="draw-canvas"></canvas>
-
         <!-- Section 1 -->
         <section>
               <div id="google_translate_element"></div>
@@ -1345,13 +1349,12 @@
         observer.observe(section);
     });
 
-  const canvas = document.getElementById('draw-canvas');
+    const canvas = document.getElementById('draw-canvas');
   const ctx = canvas.getContext('2d');
-
   let drawing = false;
   let tool = 'pen';
+  let lastX = 0, lastY = 0;
 
-  // Resize canvas to fit screen
   function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -1359,15 +1362,10 @@
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
-  let lastX = 0, lastY = 0;
-
   function selectTool(selected) {
     tool = selected;
-    if (tool === 'laser') {
-      canvas.style.pointerEvents = 'none'; // مجرد مؤشر فقط
-    } else {
-      canvas.style.pointerEvents = 'auto';
-    }
+    document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(`${selected}-btn`).classList.add('active');
   }
 
   function clearCanvas() {
@@ -1381,20 +1379,27 @@
 
   canvas.addEventListener('mousemove', (e) => {
     if (!drawing) return;
-
     const [x, y] = [e.offsetX, e.offsetY];
 
     if (tool === 'pen') {
-      ctx.strokeStyle = '#ff1493';
+      ctx.strokeStyle = '#4f46e5';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(lastX, lastY);
       ctx.lineTo(x, y);
       ctx.stroke();
-    }
-
-    if (tool === 'eraser') {
+    } else if (tool === 'eraser') {
       ctx.clearRect(x - 8, y - 8, 16, 16);
+    } else if (tool === 'laser') {
+      ctx.strokeStyle = 'rgba(255,0,0,0.7)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+      setTimeout(() => {
+        ctx.clearRect(x - 10, y - 10, 20, 20);
+      }, 200); // يمسح بسرعة
     }
 
     [lastX, lastY] = [x, y];
@@ -1403,7 +1408,8 @@
   canvas.addEventListener('mouseup', () => drawing = false);
   canvas.addEventListener('mouseleave', () => drawing = false);
 
-
+  // Default tool
+  selectTool('pen');
 </script>
 </body>
 </html>
