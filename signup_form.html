@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Signup Form</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      height: 100vh;
+      color: #333;
+    }
+    .form-container {
+      max-width: 400px;
+      width: 100%;
+    }
+    h1 {
+      font-weight: 600;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #222;
+    }
+    p.description {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: #444;
+      font-size: 0.9rem;
+    }
+    input[type="text"],
+    input[type="email"],
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    select:focus {
+      border-color: #4a90e2;
+    }
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+    .checkbox-container input[type="checkbox"] {
+      margin-right: 10px;
+      width: 16px;
+      height: 16px;
+    }
+    .checkbox-container label {
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: #555;
+      margin: 0;
+    }
+    .checkbox-container a {
+      color: #4a90e2;
+      text-decoration: none;
+    }
+    .checkbox-container a:hover {
+      text-decoration: underline;
+    }
+    button {
+      background-color: #a9d6ff;
+      border: none;
+      border-radius: 20px;
+      padding: 12px 0;
+      width: 100%;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a73e8;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(169, 214, 255, 0.6);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    button:hover {
+      background-color: #7bb8ff;
+      box-shadow: 0 6px 12px rgba(123, 184, 255, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Ready to start your success story?</h1>
+    <p class="description">Signup to our website and start leafing through your favorite literature today!</p>
+    <form>
+      <label for="fullname">Full name</label>
+      <input type="text" id="fullname" name="fullname" placeholder="Jane Doe" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="janedoe@mail.com" required />
+
+      <label for="interest">Area of interest</label>
+      <input type="text" id="interest" name="interest" placeholder="" />
+
+      <label for="options">Select an option</label>
+      <select id="options" name="options">
+        <option value="" disabled selected>Select an option</option>
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </select>
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="terms" name="terms" required />
+        <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+      </div>
+
+      <button type="submit">Sign up</button>
+    </form>
+  </div>
+</body>
+</html>
